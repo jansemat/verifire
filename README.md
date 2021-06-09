@@ -1,5 +1,7 @@
 # Verifire
 
+![](img/meme.jpg)
+
 ### Description
 _Note: This is a term project for a college course._ 
 
