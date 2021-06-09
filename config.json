@@ -1,0 +1,45 @@
+{
+	"0": {
+		"description": "source IP address",
+		"varname": "srcip",
+		"type": "ipv4"
+	},
+	"1": {
+		"description": "destination IP address, CIDR format",
+		"varname": "dstip",
+		"type": "ipv4"
+	},
+	"2": {
+		"description": "source port",
+		"varname": "srcprt",
+		"type": "int_range",
+		"min": 0,
+		"max": 65535
+	},
+	"3": {
+		"description": "destination port",
+		"varname": "dstprt",
+		"type": "int_range",
+		"min": 0,
+		"max": 65535
+	},
+	"4": {
+		"description": "IP protocol",
+		"varname": "prot",
+		"type": "int_range",
+		"min": 0,
+		"max": 256
+	},
+	"5": {
+		"description": "TCP flags",
+		"varname": "flags",
+		"type": "int_range",
+		"min": 0,
+		"max": 65535
+	},
+	"6": {
+		"description": "decision",
+		"varname": "des",
+		"type": "decision"
+	}
+}
