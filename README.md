@@ -1,7 +1,5 @@
 # Verifire
 
-## Introduction
-
 ### Description
 _Note: This is a term project for a college course._ 
 
@@ -104,8 +102,6 @@ Done! Starting verification process (field validation will be done in real-time)
 - Statistics:
 -- Time to create formula: 9.299233675003052s
 -- Time to check satisfiability (verify formula): 0.05014443397521973s
-
-
 ```
 
 ### Step 3: Testing _verifire_ using generated test cases
