@@ -26,39 +26,30 @@ def default_deny_rule(config):
 #
 def main():
 	# ensure proper arguments
-	if len(sys.argv) != 2:
-		print("Usage: ./classbench [...] | python3 " + sys.argv[0] + " config.json >> discard_slice.csv")
-		sys.exit(1)
+	if len(sys.argv) != 4:
+		sys.exit("Usage: python3 " + sys.argv[0] + " [config.json] [big_ruleset.csv] [integer > 0] >> discard_slice.csv")
 
 	# ensure proper config, and that default-deny rule can be made
 	try:
 		with open(sys.argv[1], "r") as fd:
 			config = json.load(fd)
+		with open(sys.argv[2], "r") as fd:
+			big_rules = fd.read().splitlines()
+		num_rules = int(sys.argv[3])
+		if num_rules < 0:
+			sys.exit("Integer must be >= 0")
 	except:
-		sys.exit("Not valid config.json file")
+		sys.exit("Error opening config.json or big_ruleset.csv")
 	try:
 		last_rule = default_deny_rule(config)
 	except:
 		sys.exit("Can't generate default-deny rule given configuration file")
-
-	# get input from classbench, turn to CSV
-	stdinput = sys.stdin.read().splitlines()
-	for i in range(len(stdinput)):
-		# turn to CSV
-		line = stdinput[i]
-		out_data = ' '.join(line.split()).replace(" : ", "-").replace(" ",",").replace("@","") + ",allow"
-
-		# If ip_addrs are 0.0.0.0/0 and 0.0.0.0/0, then replace one of them with other range
-		if out_data.split(",")[0] == "0.0.0.0/0" and out_data.split(",")[1] == "0.0.0.0/0":
-			idx = random.randint(0,1)
-			out_data2 = out_data.split(",")
-			out_data2[idx] = ".".join([str(random.randint(0,254)) for i in range(3)]) + ".0/24"
-			out_data = ",".join(out_data2)
-
-		# print data and return
-		print(out_data)
+	
+	idx = random.sample([i for i in range(len(big_rules))], num_rules)
+	for i in idx:
+		print(big_rules[i])
 	print(last_rule)
-	return
+	
 
 
 if __name__ == "__main__":
